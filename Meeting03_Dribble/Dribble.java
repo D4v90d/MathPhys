@@ -40,6 +40,9 @@ public class Dribble {
         // create the ball
         balls.add(new Ball(300, 200, 50, 10, 10, Color.blue));
         balls.add(new Ball(300, 100, 20, 3, -3, Color.green));
+        // new balls
+        balls.add(new Ball(300, 300, 100, 20, 20, Color.red));
+        balls.add(new Ball(300, 100, 10, -7, -5, Color.black));
 
         drawingArea = new DrawingArea(frame.getWidth(), frame.getHeight(), balls, walls);
         frame.add(drawingArea);
