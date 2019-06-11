@@ -8,7 +8,6 @@ import java.util.ArrayList;
 /*
     MatFis pertemuan 3
     Collision between parabolically moving object against wall
-
     TODO:
      0. Review about elastic and inelastic collisions. What happened when you change the coefficient of resistution (COR)?
      1. Add more balls with different colors, sizes, and velocities
@@ -41,8 +40,9 @@ public class Dribble {
         balls.add(new Ball(300, 200, 50, 10, 10, Color.blue));
         balls.add(new Ball(300, 100, 20, 3, -3, Color.green));
         // new balls
-        balls.add(new Ball(300, 300, 100, 20, 20, Color.red));
-        balls.add(new Ball(300, 100, 10, -7, -5, Color.black));
+        balls.add(new Ball(300, 300, 85, 20, 20, Color.red));
+        balls.add(new Ball(300, 100, 60, -7, -5, Color.black));
+        balls.add(new Ball(300, 150, 40, 0, 15, Color.orange));
 
         drawingArea = new DrawingArea(frame.getWidth(), frame.getHeight(), balls, walls);
         frame.add(drawingArea);
