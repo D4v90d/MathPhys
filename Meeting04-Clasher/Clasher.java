@@ -1,6 +1,7 @@
-package Meeting04_Clasher;
+/* TODO 1 */
 
 import javax.swing.JFrame;
+import javax.swing.*;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.MouseAdapter;
@@ -37,6 +38,8 @@ public class Clasher {
         frame.setFocusable(true);
         frame.setVisible(true);
 
+
+
         // create the walls
         createWalls();
 
@@ -48,7 +51,7 @@ public class Clasher {
 
         drawingArea = new DrawingArea(frame.getWidth(), frame.getHeight(), balls, walls, balls.size() - 1, destination);
         frame.add(drawingArea);
-
+        
         frame.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -68,6 +71,7 @@ public class Clasher {
 
                 hitter.setVelocityX(drawingArea.getTime() * distanceX / distance);
                 hitter.setVelocityY(drawingArea.getTime() * distanceY / distance);
+                //test.setText(Double.toString(hitter.getVelocityX()));
 
                 drawingArea.setPress(false);
             }
@@ -89,10 +93,14 @@ public class Clasher {
         // vertical wall must be defined in clockwise direction
         // horizontal wall must be defined in counter clockwise direction
 
-        walls.add(new Wall(1200, 100, 100, 100, Color.black));	// horizontal top
-        walls.add(new Wall(100, 600, 1200, 600, Color.black));  // horizontal bottom
+        //(startX,startY,endX,endY,color)
+
+        walls.add(new Wall(100, 100, 700, 200, Color.black));	// horizontal top
+        walls.add(new Wall(700, 200, 1200, 100, Color.black));  // horizontal bottom
         walls.add(new Wall(1200, 100, 1200, 600, Color.black));  // vertical right
         walls.add(new Wall(100, 600, 100, 100, Color.black));  // vertical left
+        walls.add(new Wall(100,600,620,700,Color.black));
+        walls.add(new Wall(620,700,1200,600,Color.black));
     }
 
     public static void main(String[] args) {
