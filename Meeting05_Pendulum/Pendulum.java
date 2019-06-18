@@ -46,7 +46,7 @@ public class Pendulum extends JFrame implements Runnable {
 		private double mousePressedX;
 		private double mousePressedY;
 
-		private int maxBalls = 1;
+		private int maxBalls = 4;
 		private double ropeLength = 400;
 		private double ballSize = 40;
 		private double firstRopeX = 600;
