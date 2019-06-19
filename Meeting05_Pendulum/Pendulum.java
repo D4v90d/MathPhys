@@ -46,7 +46,7 @@ public class Pendulum extends JFrame implements Runnable {
 		private double mousePressedX;
 		private double mousePressedY;
 
-		private int maxBalls = 4;
+		private int maxBalls = 3;
 		private double ropeLength = 400;
 		private double ballSize = 40;
 		private double firstRopeX = 600;
@@ -157,13 +157,14 @@ public class Pendulum extends JFrame implements Runnable {
 		}
 		
 		public void update()
-		{
+		{		
 			//update the rope if no mouse is pressed
 			if(!isPressed)
 			{
 				for(Ball b: balls)
 				{					
 					b.move();
+					b.ballCollide(balls);
 				}
 			}
 		}
