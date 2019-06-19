@@ -204,7 +204,6 @@ public class Ball {
 					getPositionY() == otherBall.getPositionY() &&
 					getRadius() == otherBall.getRadius());
 		}
-				
-			
+					
 	}
 }
