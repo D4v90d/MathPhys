@@ -3,7 +3,6 @@ package Meeting06_Billiard;
 /*
 	Matfis pertemuan 6
 	Half-fledged billiard
-
 	TODO:
 	 1. Create billiard balls, use 8-ball rules.
 	 2. Assign one ball to be the hitter (preferably not colored white)
@@ -16,6 +15,7 @@ package Meeting06_Billiard;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
+import java.lang.Math;
 
 import javax.swing.JFrame;
 
@@ -59,13 +59,45 @@ public class Billiard {
 		walls.add(new Wall(wallWidth + wallX, wallY, wallWidth + wallX, wallHeight + wallY));	// bottom wall
 		walls.add(new Wall(wallWidth + wallX, wallHeight + wallY, wallX, wallHeight + wallY));	// right wall
 
-		Random randomGenerator = new Random();
 
-		for (int i = 0; i < 3; i++) {
-			int positionX = randomGenerator.nextInt(wallWidth - (int) (Ball.RADIUS)) + wallX + (int) Ball.RADIUS;
-			int positionY = randomGenerator.nextInt(wallHeight - (int) (Ball.RADIUS)) + wallY + (int) Ball.RADIUS;
-			Color color = new Color(randomGenerator.nextInt(255), randomGenerator.nextInt(255), randomGenerator.nextInt(255));
-			balls.add(new Ball(positionX, positionY, color));
+		double x = frame.getWidth() * 0.66;     
+		double cy  = frame.getHeight() / 2.0;   
+		createBalls(x,cy);    
+
+		/*
+			Pseudocode
+
+			procedure(x,cy)	//cy = starting coordinate of y-axis
+
+				for i = 1 to 5
+					y = cy
+					for j = 0 to i
+						Create ball(x,y)
+						y = y + 2r
+					x = x + r(sqrt(3))
+					y = y - (i - 1)r 
+		*/
+
+
+		
+	}
+
+	public void createBalls(double x, double cy)
+	{
+		double y;
+		Random randomGenerator = new Random();
+		for (int i = 1; i <= 5; i++) 
+		{
+			y = cy;
+			x = x + (Ball.RADIUS * Math.sqrt(3.0));
+			y = y - (i - 1) * Ball.RADIUS;
+			for (int j = 0; j < i; j++)
+			{
+				Color color = new Color(randomGenerator.nextInt(255), randomGenerator.nextInt(255), randomGenerator.nextInt(255));
+				balls.add(new Ball(x,y,color));
+				y = y + (2*Ball.RADIUS);
+			}
+		
 		}
 	}
 
