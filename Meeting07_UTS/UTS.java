@@ -1,5 +1,3 @@
-package Meeting07_UTS;
-
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -8,11 +6,10 @@ import javax.swing.JFrame;
 /*
 	Matfis UTS
 	Brick breaker
-
 	TODO:
 	 1. Separate drawing area from frame
      2. Make more brick targets
-     3. Increase brick size and lessen gaps among bricks
+     3. Increase brick size and increase gaps among bricks
      4. Enlarge ball and change all colors in the game system
      5. Create point system
 	 6. Make controlledBlock controllable by keyboard only
@@ -72,7 +69,7 @@ public class UTS {
 	{
 		//configure the main canvas
 		frame = new JFrame();
-		frame.setSize(1366, 768);
+		frame.setSize(1020, 720);
 		frame.setBackground(Color.WHITE);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setUndecorated(true);
@@ -93,36 +90,48 @@ public class UTS {
 		maxY = (frame.getHeight() - originY)/scale;
 					
 		//create the ball (x-axis,y-axis,radius,vx,vy,color) in cartesian scale
-		v = -0.3 + Math.random()*0.3;
-		ball = new Ball(0, 0, 0.2, v, v, Color.BLACK);
-		
-		//create the arena
-		arenaX1 = -15; arenaX2 = 15;
-		arenaY1 = 10; arenaY2 = -10;			
-		walls[0] = new Wall(arenaX2, arenaY1, arenaX1, arenaY1, Color.BLACK);	//north wall (right to left)
-		walls[1] = new Wall(arenaX2, arenaY2, arenaX2, arenaY1, Color.BLACK);	//east wall (bottom to top)
-		walls[2] = new Wall(arenaX1, arenaY2, arenaX2, arenaY2, Color.BLACK);	//south wall (left to right)
-		walls[3] = new Wall(arenaX1, arenaY1, arenaX1, arenaY2, Color.BLACK);	//west wall (top to bottom)
+		// create the ball (x-axis,y-axis,radius,vx,vy,color) in cartesian scale
+		v = -0.5 + Math.random() * 0.5;
+		ball = new Ball(0, 0, 0.85, v, v, Color.BLUE);
 
-		//create the block to be controlled
+		// create the arena
+		arenaX1 = -15;
+		arenaX2 = 15;
+		arenaY1 = 10;
+		arenaY2 = -10;
+		walls[0] = new Wall(arenaX2, arenaY1, arenaX1, arenaY1, Color.RED); 	// north wall (right to left)
+		walls[1] = new Wall(arenaX2, arenaY2, arenaX2, arenaY1, Color.BLUE); 	// east wall (bottom to top)
+		walls[2] = new Wall(arenaX1, arenaY2, arenaX2, arenaY2, Color.RED); 	// south wall (left to right)
+		walls[3] = new Wall(arenaX1, arenaY1, arenaX1, arenaY2, Color.BLUE); 	// west wall (top to bottom)
+
+		// create the block to be controlled
 		vX = 0.1;
-		blockWidth = 1.5;
-		blockHeight= 0.5;
-		controlledBlock = new Block(0, -6, blockWidth, blockHeight, Color.BLACK);
-		
-		//setting the position for the blocks to be hit
+		blockWidth = 3.0;
+		blockHeight = 1.0;
+		controlledBlock = new Block(0, -6, blockWidth, blockHeight, Color.GREEN);
+
+		// setting the position for the blocks to be hit
 		ttlPerRow = 5;
 		ttlPerCol = 3;
-		targetWidth = 1; targetHeight= 0.5;
+		targetWidth = 1; targetHeight = 0.5;
 		double targetX, targetY, incX, incY, leftMostX, rightMostX, topY, bottomY;
-		leftMostX = arenaX1 + 0.5 + targetWidth/2; rightMostX = arenaX2 - 0.5 - targetWidth/2;
-		topY = arenaY1 - 1; bottomY = 0;
-		targetX = leftMostX; targetY = topY;
-		incX = ((rightMostX - leftMostX) / (ttlPerRow-1));
+		leftMostX = arenaX1 + 0.5 + targetWidth / 2;
+		rightMostX = arenaX2 - 0.5 - targetWidth / 2;
+		topY = arenaY1 - 1;
+		bottomY = 0;
+		targetX = leftMostX;
+		targetY = topY;
+		incX = ((rightMostX - leftMostX) / (ttlPerRow - 1));
 		incY = 0;
+
+		double gap = 0.0;
+
 		//create the blocks to be hit
-		for(int i=0; i<ttlPerRow; i++)			
-			targets.add(new Block(targetX + i * incX, targetY + i * incY, targetWidth, targetHeight, Color.BLUE));
+		for(int i=0; i<ttlPerRow; i++)
+		{		
+			targets.add(new Block(targetX + i * incX - gap, targetY + i * incY, targetWidth * 1.8, targetHeight, Color.YELLOW));
+			gap += 0.1;
+		}
 		
 		//start the thread to draw functions to canvas
 		DrawingArea drawingArea = new DrawingArea(frame.getWidth(), frame.getHeight(), ball, walls, controlledBlock, targets);
@@ -135,6 +144,8 @@ public class UTS {
 	 * @param ball
 	 * @param block
 	 */
+
+	 /*
 	public void detectCollision(Ball ball, Block block)
 	{		
 		//check if the returned side is the correct one based on ball's velocity
@@ -149,12 +160,15 @@ public class UTS {
 			closestSide = block.closestSide(ball.getX(), ball.getY(), 2, 3);			
 		detectCollision(ball, closestSide);					
 	}
+	*/
 	
 	/**
 	 * detect collision between a ball and a wall
 	 * @param ball
 	 * @param wall
 	 */
+
+	 /*
 	public void detectCollision(Ball ball, Wall wall)
 	{
 		double dist = wall.distanceLineSegment(ball.getX(), ball.getY()); 
@@ -180,8 +194,8 @@ public class UTS {
 			ball.setVy(newVy);
 		}				
 	}
-
-	/*public void run() {
+	
+	public void run() {
 		while(true)
 		{
 			update();
@@ -272,8 +286,8 @@ public class UTS {
 		{
 			System.out.println("Graphics error: " + ex);  
 		}		
-	}*/
-
+	}
+	*/
 	public static void main(String[] args) {
 		EventQueue.invokeLater(UTS::new);
 	}
