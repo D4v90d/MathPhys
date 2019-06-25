@@ -111,8 +111,8 @@ public class UTS {
 		controlledBlock = new Block(0, -6, blockWidth, blockHeight, Color.BLACK);
 		
 		//setting the position for the blocks to be hit
-		ttlPerRow = 4;
-		ttlPerCol = 1;
+		ttlPerRow = 5;
+		ttlPerCol = 3;
 		targetWidth = 1; targetHeight= 0.5;
 		double targetX, targetY, incX, incY, leftMostX, rightMostX, topY, bottomY;
 		leftMostX = arenaX1 + 0.5 + targetWidth/2; rightMostX = arenaX2 - 0.5 - targetWidth/2;
@@ -181,7 +181,7 @@ public class UTS {
 		}				
 	}
 
-	public void run() {
+	/*public void run() {
 		while(true)
 		{
 			update();
@@ -272,7 +272,7 @@ public class UTS {
 		{
 			System.out.println("Graphics error: " + ex);  
 		}		
-	}
+	}*/
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(UTS::new);
