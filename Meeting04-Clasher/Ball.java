@@ -55,11 +55,25 @@ public class Ball {
     }
 
     public void setVelocityX(double velocityX) {
-        this.velocityX = velocityX;
+        if (this.mass == 1)
+        {
+            this.velocityX = 0.0;
+        }
+        else
+        {
+            this.velocityX = velocityX;
+        }
     }
 
     public void setVelocityY(double velocityY) {
-        this.velocityY = velocityY;
+        if (this.mass == 1)
+        {
+            this.velocityY = 0.0;
+        }
+        else
+        {
+            this.velocityY = velocityY;
+        }
     }
 
     // drawing function
@@ -93,6 +107,12 @@ public class Ball {
     public void ballCollide(ArrayList<Ball> balls) {
         for (Ball b: balls) {
             if (b != this && this.distance(b) <= this.radius + b.getRadius()) {
+                if (this.getMass() == 1)
+                {
+                    balls.remove(b);
+                    balls.remove(this);
+                    break;
+                }
                 //calculate the unit centre vector, that is the vector between the centre of the two balls colliding
                 double CVectorX = b.getPositionX() - this.positionX;
                 double CVectorY = b.getPositionY() - this.positionY;
