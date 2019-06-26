@@ -2,9 +2,6 @@ package Meeting02_Shooter;
 
 
 import javax.swing.JFrame;
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import java.awt.BasicStroke;
@@ -16,6 +13,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 /*
     MatFis pertemuan 2
