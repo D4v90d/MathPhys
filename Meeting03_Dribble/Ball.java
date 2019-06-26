@@ -31,6 +31,19 @@ public class Ball {
         g.setColor(tempColor);
     }
 
+    //linear movement using Newton's first law
+     public void move() {
+        positionX += velocityX;
+        positionY += velocityY;
+
+        double velocity = Math.sqrt(velocityX * velocityX + velocityY * velocityY);
+
+        if (velocity > 0){
+            velocityX -= a;
+            velocityY -= a;
+        }
+    }
+    
     // move the ball by modifying current position, with assumption that time = 1
     public void move() {
         positionX += velocityX;
