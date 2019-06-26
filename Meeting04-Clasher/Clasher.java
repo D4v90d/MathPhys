@@ -1,5 +1,3 @@
-/* TODO 1 */
-
 import javax.swing.JFrame;
 import javax.swing.*;
 import java.awt.Color;
@@ -27,8 +25,11 @@ public class Clasher {
     private ArrayList<Wall> walls = new ArrayList<>();
     private ArrayList<Ball> balls = new ArrayList<>();
     private Ball hitter;
+    private Ball hitter2;
+    private Ball hitter3;
+    private Ball hole;
     private Vector destination;
-
+    
     public Clasher() {
         //configure the main canvas
         frame = new JFrame("Clashing Balls");
@@ -44,13 +45,31 @@ public class Clasher {
         createWalls();
 
         // create the ball
-        balls.add(new Ball(300, 200, 50, Color.blue, 10));
+        balls.add(new Ball(200, 500, 50, Color.red, 10));
+        balls.add(new Ball(600, 500, 40, Color.blue, 7));
+        balls.add(new Ball(300, 400, 30, Color.yellow, 10));
         hitter = new Ball(400, 400, 20, Color.green, 4);
+        hole = new Ball(900, 350, 50, Color.black, 10);
+        
+        balls.add(hole);
         balls.add(hitter);
+        
         destination = new Vector(hitter.getPositionX(), hitter.getPositionY());
 
         drawingArea = new DrawingArea(frame.getWidth(), frame.getHeight(), balls, walls, balls.size() - 1, destination);
         frame.add(drawingArea);
+        
+        JFrame f2 = new JFrame("Speed");
+        JLabel test = new JLabel();
+        test.setBounds(50,50,300,100);
+        JLabel test2 = new JLabel();
+        test.setBounds(50,50,300,100);
+        test.setText(Double.toString(hitter.getVelocityX()));
+        test2.setText(Double.toString(hitter.getVelocityY()));
+        f2.add(test);
+        f2.add(test2);
+        f2.setSize(600,400);
+        f2.setVisible(true);
         
         frame.addMouseListener(new MouseAdapter() {
             @Override
