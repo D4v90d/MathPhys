@@ -1,10 +1,15 @@
 package Meeting03_Dribble;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.*;
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.GridLayout;
 import java.util.ArrayList;
-
 /*
     MatFis pertemuan 3
     Collision between parabolically moving object against wall
@@ -28,22 +33,91 @@ public class Dribble {
     public Dribble() {
         //configure the main canvas
         frame = new JFrame("Dribbling Balls");
+        button = new JButton("Add Ball");
+        button.setBounds(50, 100, 95, 30);
+        frame.add(button);
+        frame.setSize(400,400);
+        frame.setLayout(null);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setBackground(Color.WHITE);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+        
+        JFrame frame = new JFrame("Ball Creator & Killer")
+        label = new JLabel("Ball Atribute");     
+        textField = new JTextField("Ball Radius");
+        textField.setBounds(10, 30, 95, 30);
+        textField = new JTextField("Ball Position X");
+        textField.setBounds(10, 70, 95, 30);
+        textField = new JTextField("Ball Position Y");
+        textField.setBounds(10, 110, 95, 30);
+        textField = new JTextField("Ball Velocity X");
+        textField.setBounds(10, 150, 95, 30);
+        textField = new JTextField("Ball Velocity Y");
+        textField.setBounds(10, 190, 95, 30);
+        textField = new JTextField("Ball Color");
+        textField.setBounds(10, 230, 95, 30);
+        
+        frame.add(ballRadiusLabel);
+        frame.add(ballPosXLabel);
+        frame.add(ballPosYLabel);
+        frame.add(ballVelXLabel);
+        frame.add(ballVelYLabel);
+        frame.add(ballColorLabel);
+
+        JButton button = new JButton("Generate Ball");
+        button.setBounds(300, 300, 100, 20);
+
+        button.addActionListener(new ActionListener()){
+            
+            public void actionPerformed(ActionEvent e)
+            {
+                Color color2 = Color.black; // default color
+                
+                double radius = Double.parseDouble(radius.getText());
+                double posX = Double.parseDouble(positionX.getText());
+                double posY = Double.parseDouble(positionY.getText());
+                double velX = Double.parseDouble(velocityX.getText());
+                double velY = Double.parseDouble(velocityY.getText());
+                String col = colorSet.getText();
+                switch(col.toLowerCase())
+                {
+                    case "black":
+                        color2 = color.black;
+                        break;
+                    case "blue":
+                        color2 = color.blue;
+                        break;
+                    case "red":
+                        color2 = color.red;
+                        break;
+                    case "green":
+                        color2 = color.green;
+                        break;
+                    case "yellow":
+                        color2 = color.yellow;
+                        break;
+                    case "orange":
+                        color2 = color.orange;
+                        break;    
+                    case "grey":
+                        color2 = color.grey;
+                        break;
+                }
+
+
+
+
+                balls.add(new Ball(radius, posX, posY, velX, velY, color2));
+            }
+        };
+        
+        JButton kill = new JButton("Delete Ball");
+        kill.setBounds(450,300,100,20);
 
         // create the walls
         createWalls();
-
-        // create the ball
-        balls.add(new Ball(300, 200, 50, 10, 10, Color.blue));
-        balls.add(new Ball(300, 100, 20, 3, -3, Color.green));
-        // new balls
-        balls.add(new Ball(300, 300, 85, 20, 20, Color.red));
-        balls.add(new Ball(300, 100, 60, -7, -5, Color.black));
-        balls.add(new Ball(300, 150, 40, 0, 15, Color.orange));
-
+        
         drawingArea = new DrawingArea(frame.getWidth(), frame.getHeight(), balls, walls);
         frame.add(drawingArea);
         drawingArea.start();
