@@ -45,10 +45,16 @@ public class Billiard {
 		frameHeight = frame.getHeight() - frame.getInsets().top;
 
 		createObjects();
-		hitter = new Ball((frame.getWidth() * 0.66) - 400.0, frame.getHeight() / 2.0, Color.black);
+		hitter = new Ball((frame.getWidth() * 0.66) - 400.0, frame.getHeight() / 2.0, 30.0, 10.0, Color.red);
+		balls.add(new Ball(140,245,50.0,1.0,Color.black));
+		balls.add(new Ball(frame.getWidth()/2.0,250,50.0,1.0,Color.black));
+		balls.add(new Ball(1800,250,50.0,1.0,Color.black));
+		balls.add(new Ball(140,760,50.0,1.0,Color.black));
+		balls.add(new Ball(frame.getWidth()/2.0,760,50.0,1.0,Color.black));
+		balls.add(new Ball(1800,760,50.0,1.0,Color.black));
 		balls.add(hitter);
 		destination = new Vector(hitter.getPositionX(), hitter.getPositionY());
-
+		
 		DrawingArea drawingArea = new DrawingArea(frame.getWidth(), frameHeight, balls, walls, balls.size() - 1, destination);
 		frame.add(drawingArea);
 
